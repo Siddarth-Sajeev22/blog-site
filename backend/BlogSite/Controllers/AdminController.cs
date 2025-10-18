@@ -1,9 +1,11 @@
 using BlogSite.Interfaces;
 using BlogSite.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IBlogPostsService _service;

@@ -64,3 +64,5 @@ Thumbs.db
 # Visual Studio and VS Code settings
 .vs/
 .vscode/
+
+appsettings.json

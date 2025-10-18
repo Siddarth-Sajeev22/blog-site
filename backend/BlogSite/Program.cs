@@ -1,6 +1,7 @@
 using System;
 using BlogSite.Data;
 using BlogSite.Extensions;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,26 @@ builder.Services.AddDbContext<BlogDbContext>(options =>
 
 // Register application services via extension
 builder.Services.AddApplicationServices();
+builder.Services.Configure<AdminCredentials>(
+    builder.Configuration.GetSection("AdminCredentials")
+);
+
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Auth/Login";      // Redirect here if not logged in
+        options.LogoutPath = "/Auth/Logout";
+        options.AccessDeniedPath = "/Auth/AccessDenied";
+
+        // Security Hardening
+        options.Cookie.HttpOnly = true; 
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always; 
+        options.SlidingExpiration = true;
+        options.ExpireTimeSpan = TimeSpan.FromHours(2); 
+    });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -26,8 +47,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Admin}/{action=Index}/{id?}");
 
 app.Run();
