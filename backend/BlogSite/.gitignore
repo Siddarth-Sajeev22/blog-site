@@ -1,0 +1,66 @@
+# Ignore Visual Studio and build output folders
+bin/
+obj/
+out/
+Debug/
+Release/
+
+# Ignore SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# Ignore EF Core generated snapshot files (optional)
+# Migrations/*Snapshot.cs
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code settings
+.vscode/
+.vs/
+
+# Build artifacts
+*.log
+*.tlog
+*.cache
+*.tmp
+
+# Publish output
+publish/
+*.Publish.xml
+*.pubxml
+*.publishproj
+
+# ASP.NET temp data
+project.lock.json
+project.fragment.lock.json
+
+# Environment files
+.env
+.env.*
+appsettings.Development.json
+
+# JetBrains Rider
+.idea/
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# Node/NPM (if you use frontend assets)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# macOS and Windows junk files
+.DS_Store
+Thumbs.db
+
+# Visual Studio and VS Code settings
+.vs/
+.vscode/
